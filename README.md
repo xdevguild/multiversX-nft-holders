@@ -7,7 +7,7 @@ You can also get all the holders holding NFTs with a specif trait.
 
 #### Getting started
 ##### 1. Configuring Python
-You need to have Python installed on your machine or in the virtual environment 🤓.
+You need to have Python installed on your machine or in the virtual environment.
 
 Check your Python version by running:
 
