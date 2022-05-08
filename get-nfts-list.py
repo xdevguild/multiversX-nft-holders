@@ -82,9 +82,6 @@ func_txt = open(name_of_file, "w")
 
 values.sort(key=lambda x: x.get('nftsCount'), reverse=True)
 
-for output in values:
-    func_txt.write(output.__str__() + "\n")
-
 result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}")
 
 with open(current_date.strftime(f"{result_csv}.csv"), "wt") as fp:
