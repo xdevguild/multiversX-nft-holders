@@ -11,7 +11,6 @@ parser.add_argument("--ticker", help="Ticker of the collection", required=True)
 parser.add_argument("--trait_type", help="Item to retrieve", required=False)
 parser.add_argument("--name", help="Item to retrieve", required=False)
 
-
 args = parser.parse_args()
 
 # Constants
@@ -20,7 +19,7 @@ DEAD_RARE_ADDRESS = "erd1qqqqqqqqqqqqqpgqd9rvv2n378e27jcts8vfwynpx0gfl5ufz6hqhfy
 TRUST_WALLET_ADDRESS = "erd1qqqqqqqqqqqqqpgq6wegs2xkypfpync8mn2sa5cmpqjlvrhwz5nqgepyg8"
 FRAMEIT_WALLET_ADDRESS = "erd1qqqqqqqqqqqqqpgq705fxpfrjne0tl3ece0rrspykq88mynn4kxs2cg43s"
 ELROND_NFT_SWAP_WALLET_ADDRESS = "erd1qqqqqqqqqqqqqpgq8xwzu82v8ex3h4ayl5lsvxqxnhecpwyvwe0sf2qj4e"
-ISENGARD_WALLET_ADDRESS="erd1qqqqqqqqqqqqqpgqy63d2wjymqergsxugu9p8tayp970gy6zlwfq8n6ruf"
+ISENGARD_WALLET_ADDRESS = "erd1qqqqqqqqqqqqqpgqy63d2wjymqergsxugu9p8tayp970gy6zlwfq8n6ruf"
 
 # creating a black listed array so that these addresses won't get the token
 black_listed_addresses = [EMOON_ADDRESS,
@@ -31,7 +30,7 @@ black_listed_addresses = [EMOON_ADDRESS,
                           ISENGARD_WALLET_ADDRESS]
 
 nft_collection_name = args.ticker
-values=[]
+values = []
 single_wallet = []
 all_wallet = []
 current_date = datetime.now()
@@ -79,7 +78,7 @@ for wallet in single_wallet:
         value = {"owner": wallet, "nftsCount": all_wallet.count(wallet)}
         values.append(value)
 
-#Create output
+# Create output
 name_of_file = "output/{}".format(txt_file)
 
 p = Path('output')
@@ -95,3 +94,17 @@ with open(current_date.strftime(f"{result_csv}.csv"), "wt") as fp:
         func_txt.write(output.__str__() + "\n")
         writer.writerow([output['owner'], output['nftsCount']])
 
+# Compute useful info
+
+total_nft = 0
+average = 0
+
+for nft in range(0, len(values)):
+    total_nft = total_nft + values[nft]['nftsCount']
+
+average = round(total_nft / len(values), 2)
+
+print(f'\n----- OUTPUT INFO -----\n')
+print(f'Number of wallets: {len(values)}')
+print(f'Number of NFTs: {total_nft}\n')
+print(f'Average Nbr of NFTs per wallet {average}\n')
