@@ -34,6 +34,7 @@ nft_collection_name = args.ticker
 values=[]
 single_wallet = []
 all_wallet = []
+current_date = datetime.now()
 
 if args.trait_type and args.name:
     i = 0
@@ -51,6 +52,10 @@ if args.trait_type and args.name:
                 pass
         i = i + 100
 
+    # files name
+    txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}-{args.name}.txt")
+    result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}-{args.name}")
+
 else:
     i = 0
     while i < 10000:
@@ -65,15 +70,16 @@ else:
                 pass
         i = i + 100
 
+    # files name
+    txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}.txt")
+    result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}")
+
 for wallet in single_wallet:
     if wallet not in black_listed_addresses:
         value = {"owner": wallet, "nftsCount": all_wallet.count(wallet)}
         values.append(value)
 
-# write results
-current_date = datetime.now()
-
-txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}.txt")
+#Create output
 name_of_file = "output/{}".format(txt_file)
 
 p = Path('output')
@@ -81,8 +87,6 @@ p.mkdir(parents=True, exist_ok=True)
 func_txt = open(name_of_file, "w")
 
 values.sort(key=lambda x: x.get('nftsCount'), reverse=True)
-
-result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}")
 
 with open(current_date.strftime(f"{result_csv}.csv"), "wt") as fp:
     writer = csv.writer(fp, delimiter=",")
