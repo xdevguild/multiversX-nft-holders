@@ -32,3 +32,20 @@ python get-nfts-list.py --ticker EBUDDIES-e18a04 --trait_type Mouth --name Smile
 ```
 
 Check the **output** folder for results.
+
+
+<p align="center" >
+  <img width="451" alt="CSV" src="https://user-images.githubusercontent.com/23435882/169235388-da661a26-903a-433b-bbac-6829a11b255b.png"><br>
+  <b>CSV output</b>
+</p>
+
+
+
+If you want to distribute $LKMEX to your holder you can use this script using the CSV file:
+https://github.com/PaulHendi/ELROND-LKMEX-AIRDROP
+
+
+<p align="center" >
+  <img src="https://user-images.githubusercontent.com/23435882/169236163-2ed5bd72-df97-4865-aa28-bf2695e52e43.png"><br>
+  <b>Mayde with ❤️ by Elrond Buddies</b>
+</p>
