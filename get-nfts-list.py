@@ -1,6 +1,7 @@
 import argparse
 import csv
 import requests
+import time
 
 from datetime import datetime
 from pathlib import Path
@@ -37,7 +38,7 @@ current_date = datetime.now()
 
 if args.trait_type and args.name:
     i = 0
-    while i < 1000:
+    while i < 10000:
         nfts = requests.get(f'https://api.elrond.com/collections/{nft_collection_name}/nfts?from=' + str(
             i) + '&size=100&withOwner=true').json()
         for nft in nfts:
@@ -49,6 +50,7 @@ if args.trait_type and args.name:
                         all_wallet.append(nft["owner"])
             except:
                 pass
+        time.sleep(0.09)
         i = i + 100
 
     # files name
@@ -67,6 +69,7 @@ else:
                 all_wallet.append(nft["owner"])
             except:
                 pass
+        time.sleep(0.09)
         i = i + 100
 
     # files name
@@ -102,7 +105,8 @@ average = 0
 for nft in range(0, len(values)):
     total_nft = total_nft + values[nft]['nftsCount']
 
-average = round(total_nft / len(values), 2)
+if len(values) > 0:
+    average = round(total_nft / len(values), 2)
 
 print(f'\n----- OUTPUT INFO -----\n')
 print(f'Number of wallets: {len(values)}')

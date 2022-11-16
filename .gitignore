@@ -12,5 +12,6 @@ venv.bak/
 .DS_Store
 
 # Project specific
+Pipfile
 wallet.pem
 /output
