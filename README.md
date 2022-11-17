@@ -41,8 +41,8 @@ Check the **output** folder for results.
 
 
 
-If you want to distribute $LKMEX to your holder you can use this script using the CSV file:
-https://github.com/PaulHendi/ELROND-LKMEX-AIRDROP
+If you want to distribute $LKMEX or ESDT to your holders you can use this script with the CSV file generated:
+https://github.com/xdevguild/esdt-and-lkmek-airdrop-scripts
 
 
 <p align="center" >
