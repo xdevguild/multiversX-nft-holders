@@ -47,5 +47,5 @@ https://github.com/PaulHendi/ELROND-LKMEX-AIRDROP
 
 <p align="center" >
   <img src="https://user-images.githubusercontent.com/23435882/169236163-2ed5bd72-df97-4865-aa28-bf2695e52e43.png"><br>
-  <b>Maid with ❤️ by Elrond Buddies</b>
+  <b>Made with ❤️ by Elrond Buddies</b>
 </p>
