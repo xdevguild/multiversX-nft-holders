@@ -2,6 +2,7 @@ import argparse
 import csv
 import requests
 import time
+import sys
 
 from datetime import datetime
 from pathlib import Path
@@ -36,12 +37,18 @@ single_wallet = []
 all_wallet = []
 current_date = datetime.now()
 
-if args.trait_type and args.name:
-    i = 0
-    while i < 10000:
-        nfts = requests.get(f'https://api.elrond.com/collections/{nft_collection_name}/nfts?from=' + str(
-            i) + '&size=100&withOwner=true').json()
-        for nft in nfts:
+i = 0
+while i < 10000:
+    nfts = requests.get(f'https://api.elrond.com/collections/{nft_collection_name}/nfts?from=' + str(
+        i) + '&size=100&withOwner=true').json()
+    try:
+        if nfts['message'] == 'Validation failed for argument \'collection\': Invalid collection identifier.':
+            print(f'Collection {nft_collection_name} does not exist\n')
+            sys.exit()
+    except:
+        pass
+    for nft in nfts:
+        if args.trait_type and args.name:
             try:
                 for item_query in nft['metadata']['attributes']:
                     if args.trait_type == item_query['trait_type'] and args.name == item_query['value']:
@@ -50,29 +57,21 @@ if args.trait_type and args.name:
                         all_wallet.append(nft["owner"])
             except:
                 pass
-        time.sleep(0.09)
-        i = i + 100
-
-    # files name
-    txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}-{args.name}.txt")
-    result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}-{args.name}")
-
-else:
-    i = 0
-    while i < 10000:
-        nfts = requests.get(f'https://api.elrond.com/collections/{nft_collection_name}/nfts?from=' + str(
-            i) + '&size=100&withOwner=true').json()
-        for nft in nfts:
+        else:
             try:
                 if nft["owner"] not in single_wallet:
                     single_wallet.append(nft["owner"])
                 all_wallet.append(nft["owner"])
             except:
                 pass
-        time.sleep(0.09)
-        i = i + 100
+    time.sleep(0.09)
+    i = i + 100
 
-    # files name
+# files name
+if args.trait_type and args.name:
+    txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}-{args.name}.txt")
+    result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}-{args.name}")
+else:
     txt_file = current_date.strftime(f"%b-%d-%Y-{nft_collection_name}.txt")
     result_csv = current_date.strftime(f"output/%b-%d-%Y-{nft_collection_name}")
 
@@ -112,3 +111,4 @@ print(f'\n----- OUTPUT INFO -----\n')
 print(f'Number of wallets: {len(values)}')
 print(f'Number of NFTs: {total_nft}\n')
 print(f'Average Nbr of NFTs per wallet {average}\n')
+print(f'\n----- Made by ElrondBuddies <3 -----\n')
