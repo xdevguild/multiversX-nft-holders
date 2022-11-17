@@ -1,5 +1,5 @@
-# elrond-nft-holders
-elrond-nft-holders
+# MultiversX-nft-holders
+multiversX-nft-holders
 
 ## NFTs holder
 Generate a CSV and text file, which shows your NFTs holders and the displays a column of how many NFTs **are in the wallet**.
