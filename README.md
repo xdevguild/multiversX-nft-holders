@@ -15,6 +15,12 @@ Check your Python version by running:
 $ python3 --version
 ```
 
+Check if pip is installed, otherwise install it:
+
+```shell
+$ pip help
+```
+
 After that run
 
 ```shell
@@ -23,12 +29,28 @@ $ pip install -r requirements.txt
 
 ##### 2. Run the script
 
+#### Simple case:
+
 ```bash
 python get-nfts-list.py --ticker EBUDDIES-e18a04
 ```
 
+#### Get the NFTs for a specific trait/attribute:
+
 ```bash
 python get-nfts-list.py --ticker EBUDDIES-e18a04 --trait_type Mouth --name Smile
+```
+
+#### Get the NFTs for a number of day(s) of holding:
+
+```bash
+python get-nfts-list.py --ticker EBUDDIES-e18a04 --duration 2
+```
+
+#### Get the NFTs for a specific trait/attribute and for a number of day(s) of holding:
+
+```bash
+python get-nfts-list.py --ticker EBUDDIES-e18a04 --trait_type Mouth --name Smile --duration 2
 ```
 
 Check the **output** folder for results.
