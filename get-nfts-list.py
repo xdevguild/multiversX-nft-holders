@@ -46,7 +46,7 @@ if days_of_holding > 0:
 
 i = 0
 while i < 10000:
-    nfts = requests.get(f'https://api.elrond.com/collections/{nft_collection_name}/nfts?from=' + str(
+    nfts = requests.get(f'https://api.multiversX.com/collections/{nft_collection_name}/nfts?from=' + str(
         i) + '&size=100&withOwner=true').json()
     try:
         if nfts['message'] == 'Validation failed for argument \'collection\': Invalid collection identifier.':
@@ -92,7 +92,7 @@ for wallet in single_wallet:
             value = {"owner": wallet, "nftsCount": all_wallet.count(wallet)}
             values.append(value)
         elif args.duration is not None and days_of_holding > 0:
-            api_url = f"https://api.elrond.com/accounts/{wallet}/nfts?size=10000&search={nft_collection_name}"
+            api_url = f"https://api.multiversX.com/accounts/{wallet}/nfts?size=10000&search={nft_collection_name}"
             r = requests.get(api_url)
             nfts = r.json()
             all_nfts = len(nfts)
@@ -104,7 +104,7 @@ for wallet in single_wallet:
                     try:
                         for item_query in nft['metadata']['attributes']:
                             if args.trait_type == item_query['trait_type'] and args.name == item_query['value']:
-                                transactions_with_nfts_url = f"https://api.elrond.com/transactions?status=success&token={nft_identifier}&after={timestamp}&withScamInfo=false"
+                                transactions_with_nfts_url = f"https://api.multiversX.com/transactions?status=success&token={nft_identifier}&after={timestamp}&withScamInfo=false"
                                 r = requests.get(transactions_with_nfts_url)
                                 txs = r.json()
                                 if len(txs) == 0:
@@ -121,7 +121,7 @@ for wallet in single_wallet:
                     time.sleep(0.09)
                     nft_identifier = nft["identifier"]
                     eligible_nfts = all_nfts
-                    transactions_with_nfts_url = f"https://api.elrond.com/transactions?status=success&token={nft_identifier}&after={timestamp}&withScamInfo=false"
+                    transactions_with_nfts_url = f"https://api.multiversX.com/transactions?status=success&token={nft_identifier}&after={timestamp}&withScamInfo=false"
                     r = requests.get(transactions_with_nfts_url)
                     txs = r.json()
                     if len(txs) != 0:
